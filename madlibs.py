@@ -1,4 +1,3 @@
-from random import choice
 
 from flask import Flask, render_template, request
 
@@ -6,10 +5,6 @@ from flask import Flask, render_template, request
 # "__name__" is a special Python variable for the name of the current module
 # Flask wants to know this to know what any imported things are relative to.
 app = Flask(__name__)
-
-AWESOMENESS = [
-    'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
-    'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
 
 @app.route('/')
@@ -32,8 +27,6 @@ def greet_person():
 
     player = request.args.get("person")
 
-    
-
     return render_template("compliment.html",
                            person=player,
                            )
@@ -41,8 +34,11 @@ def greet_person():
 @app.route('/game')
 def show_madlib_form():
     response = request.args.get("response")
+    if response == "yes":
 
-    return render_template("game.html", response=response)
+        return render_template("game.html")
+    else:
+        return "Goodbye party pooper"
 
 @app.route("/madlib")
 def show_madlib():
